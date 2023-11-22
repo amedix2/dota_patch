@@ -19,7 +19,7 @@ token = Config.token
 chat_id = Config.chat_id
 text = Config.text
 
-REQUIRED_VERSION = '7.34e'
+REQUIRED_VERSION = Config.patch_version
 
 i = 0
 
