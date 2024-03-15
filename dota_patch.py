@@ -11,8 +11,11 @@ def send_message(token, chat_id, text):
 
 
 def request_patch(ver):
-    f = requests.get(url=f'https://www.dota2.com/datafeed/patchnotes?version={ver}')
-    return f.json()['success']
+    try:
+        f = requests.get(url=f'https://www.dota2.com/datafeed/patchnotes?version={ver}')
+        return f.json()['success']
+    except Exception:
+        raise ConnectionAbortedError
 
 
 token = Config.token
@@ -30,8 +33,11 @@ while True:
             send_message(token, chat_id, text)
             break
         else:
-            print(f'{i}: waiting for the patch...')
+            print(f'{i}: waiting for the patch {REQUIRED_VERSION}...')
             i += 10
+    except ConnectionAbortedError:
+        print('internet connection has been lost')
+    except Exception as e:
+        print(f'unknown error: {str(e)[:100]}')
+    finally:
         time.sleep(10)
-    except Exception:
-        print('exeption')
