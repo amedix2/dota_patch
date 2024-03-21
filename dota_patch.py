@@ -22,6 +22,8 @@ token = Config.token
 chat_id = Config.chat_id
 text = Config.text
 
+LINK = 'https://www.dota2.com/patches/'
+
 REQUIRED_VERSION = Config.patch_version
 
 i = 0
@@ -30,7 +32,7 @@ while True:
     try:
         r = request_patch(REQUIRED_VERSION)
         if r:
-            send_message(token, chat_id, text)
+            send_message(token, chat_id, f'{text}\n{LINK + REQUIRED_VERSION}')
             break
         else:
             print(f'{i}: waiting for the patch {REQUIRED_VERSION}...')
