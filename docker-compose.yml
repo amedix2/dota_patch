@@ -1,0 +1,10 @@
+services:
+  dota_patch:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    pull_policy: always
+    restart: on-failure
+    container_name: dota_patch
+    env_file:
+      - ./.env
