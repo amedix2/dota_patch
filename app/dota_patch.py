@@ -40,7 +40,9 @@ if __name__ == '__main__':
             r = request_patch()
             if r != current_patch:
                 send_message(token, chat_id, f'{text}\n{LINK + r}')
-                break
+                current_patch = r
+                i = 0
+                logging.warn(f'patch {i} is out\nwaiting for new patch')
             else:
                 logging.info(f'{i}: current patch version - {r}')
                 i += update_time
